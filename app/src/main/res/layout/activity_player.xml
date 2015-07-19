@@ -7,7 +7,7 @@
     <!-- 재생 타이틀 및 불러오기 아이콘 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="horizontal"
         android:gravity="center_horizontal"
         android:background="#ff1f55ff"
@@ -19,21 +19,32 @@
             android:layout_height="wrap_content"
             android:text="휘성-결혼까지 생각했어"
             android:textSize="25dp"
+            android:paddingTop="10dp"
             android:textColor="#FFFFFFFF"
-            android:textStyle="bold|italic"/>
+            android:textStyle="bold|italic"
+            android:gravity="center"/>
 
     </LinearLayout>>
+
+    <ProgressBar
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bar"
+        android:max="100"
+        style="?android:attr/progressBarStyleLarge"
+        android:visibility="invisible">
+    </ProgressBar>
 
     <!-- 재생 리스트 -->
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="7"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="horizontal"
         android:layout_weight="2"
         android:gravity="center">

@@ -7,6 +7,7 @@
 * 사용해서는 않되면 우리 상황에 맞게 재정의 해야 한다!!
 * */
 package json.test;
+import android.content.Context;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,14 +22,14 @@ import json.test.model.MusicDTO;
 import kr.co.stylenetwork.musicplayer.R;
 
 public class MyAdapter extends BaseAdapter {
-    JSONTest jt;
-    ArrayList<MusicDTO> list=new ArrayList<MusicDTO>();
+    Context context;
+    private ArrayList<MusicDTO> list=new ArrayList<MusicDTO>();
     LayoutInflater inflater;/*XML해석하여 메모리에 알맞는 객체를 올려주는
     객체 = 인플레이터*/
 
-    public MyAdapter( JSONTest jt){
-        this.jt=jt;
-        inflater=(LayoutInflater)jt.getSystemService(jt.LAYOUT_INFLATER_SERVICE);
+    public MyAdapter(Context context){
+        this.context=context;
+        inflater=(LayoutInflater)context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -70,6 +71,14 @@ public class MyAdapter extends BaseAdapter {
         txt_singer.setText(dto.getSinger());
 
         return view;
+    }
+
+    public void setList(ArrayList<MusicDTO> list) {
+        this.list = list;
+    }
+
+    public ArrayList<MusicDTO> getList() {
+        return list;
     }
 }
 
