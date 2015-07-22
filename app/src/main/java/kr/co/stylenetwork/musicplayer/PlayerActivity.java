@@ -32,11 +32,11 @@ public class PlayerActivity extends Activity implements AdapterView.OnItemClickL
     String sd_path;
     /*안드로이드에서는 음악,동영상 등 미디어파일을 제어하기 위해 지원되는 객체*/
     MediaPlayer mediaPlayer;
-    ImageView[] btn= new ImageView[4];
+    ImageView[] btn= new ImageView[5];
     String current_title;
     int current_position;/*현재 재생중인 음악의 ArrayList내의 index*/
     TextView txt_title;
-    String url="http://192.168.0.8:8080";
+    String url="http://192.168.0.142:8080";
     String  filename;
     ProgressBar bar;
 
@@ -53,6 +53,7 @@ public class PlayerActivity extends Activity implements AdapterView.OnItemClickL
         btn[1]=(ImageView)findViewById(R.id.bt_stop);
         btn[2]=(ImageView)findViewById(R.id.bt_play);
         btn[3]=(ImageView)findViewById(R.id.bt_next);
+        btn[4]=(ImageView)findViewById(R.id.bt_refresh);
 
         bar=(ProgressBar)findViewById(R.id.bar);
 
@@ -64,7 +65,7 @@ public class PlayerActivity extends Activity implements AdapterView.OnItemClickL
         checkNetwork();
     }
 
-    public void loadFormSDCard(){
+    public void loadFromSDCard(){
         /*
         * 스마트폰마다 SDCARD 의 위치가 틀릴 수 있으므로,
         * 본인의 스마트폰의 SDCARD 디렉토리를 프로그래밍적으로 조사해보자
@@ -105,7 +106,7 @@ public class PlayerActivity extends Activity implements AdapterView.OnItemClickL
 
             /*웹서버에 연동 시작*/
             MyAsync myAsync = new MyAsync(this, adapter);
-            myAsync.execute(url+"/member.jsp");
+            myAsync.execute(url+"/music/list");
 
         } else {
             Toast.makeText(this,"네트워크 상태 문제가 있습니다.",Toast.LENGTH_SHORT).show();
@@ -119,7 +120,7 @@ public class PlayerActivity extends Activity implements AdapterView.OnItemClickL
             try {
             /*실행할 파일 지정 */
                 //mediaPlayer.setDataSource(this, Uri.parse(sd_path+"/Music"+"/"+current_title));
-                mediaPlayer.setDataSource(this, Uri.parse(url+"/music/"+filename));
+                mediaPlayer.setDataSource(this, Uri.parse(url+"/data/"+filename));
 
                 Log.d(TAG, url+"/music/"+filename);
 
@@ -163,12 +164,17 @@ public class PlayerActivity extends Activity implements AdapterView.OnItemClickL
         play();
     }
 
+    public void refresh(){
+        checkNetwork();
+    }
+
     public void btnClick(View view){
         switch (view.getId()){
             case R.id.bt_prev:prev();break;
             case R.id.bt_stop:stop();break;
             case R.id.bt_play:play();break;
             case R.id.bt_next:next();break;
+            case R.id.bt_refresh:refresh();break;
         }
     }
 

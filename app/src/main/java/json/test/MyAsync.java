@@ -71,7 +71,7 @@ public class MyAsync extends AsyncTask<String, Void, String> {
         /* 웹서버로부터 전달받은 데이터를 ListView의 출력해보자!!*/
         try {
             JSONObject jsonObject = new JSONObject(s);
-            JSONArray array = (JSONArray) jsonObject.get("music");
+            JSONArray array = (JSONArray) jsonObject.get("playlist");
 
             ArrayList list = new ArrayList();
 
@@ -80,8 +80,10 @@ public class MyAsync extends AsyncTask<String, Void, String> {
 
                 MusicDTO dto = new MusicDTO();
 
+                dto.setId(obj.getInt("id"));
                 dto.setSinger(obj.getString("singer"));
                 dto.setTitle(obj.getString("title"));
+                dto.setContent(obj.getString("content"));
                 dto.setFile(obj.getString("file"));
 
                 list.add(dto);
